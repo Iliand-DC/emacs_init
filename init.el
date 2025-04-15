@@ -11,6 +11,10 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
+(display-line-numbers-mode)
+(setq-default display-line-numbers-type t)
+
+;; Enable vterm
 (use-package vterm
   :ensure t)
 
@@ -18,10 +22,26 @@
 (cua-mode t)
 
 ;; Load fancy default theme
-(load-theme 'modus-vivendi-tinted)
+(load-theme 'kanagawa-wave)
+
+;; Maximize window at startup
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+
+;; Indentation setup
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+
+;; Disable annoyning bell
+(setq ring-bell-function 'ignore)
+
+;; Enable which key
+(which-key-mode)
 
 ;; Set cursor style to fancy bar
 (setq-default cursor-type 'bar)
+
+;; Setup font
+(set-face-attribute 'default nil :height 130)
 
 ;; Set tab to insert tab, btw
 (global-set-key (kbd "TAB") 'tab-to-tab-stop)
@@ -32,9 +52,6 @@
 
 ;; Open vterm
 (global-set-key (kbd "C-x C-\\") 'vterm)
-
-;; Set default font bigger
-(set-frame-font "JetBrainsMono Nerd Font 13" nil t)
 
 ;; Function that will delete 4 spaces
 (defun un-indent-by-removing-4-spaces ()
@@ -52,8 +69,21 @@
 ;; Define backtab key
 (global-set-key (kbd "<backtab>") 'un-indent-by-removing-4-spaces)
 
+;; Enable mood-line
+(mood-line-mode t)
+
+;; Enable ultra scroll mode
+(ultra-scroll-mode)
+
+;; Disable warnings on emacs startup
+(setq warning-minimum-level :emergency)
+
 ;; Define kbd to kill buffer
 (global-set-key (kbd "s-k") 'kill-current-buffer)
+
+(treemacs-resize-icons 15)
+(define-key treemacs-mode-map (kbd "<left>") 'treemacs-COLLAPSE-action)
+(define-key treemacs-mode-map (kbd "<right>") 'treemacs-RET-action)
 
 ;; Verilog mode disable auto formatting
 (eval-after-load 'verilog-mode
@@ -73,15 +103,48 @@
 ;; Set verible-verilog-ls as lsp for verilog
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               '(verilog-mode . ("verible-verilog-ls" "--rules=-parameter-name-style,-case-missing-default"))))
+               '(verilog-mode . ("/Users/ilya/.local/bin/verible-verilog-ls" "--rules=-parameter-name-style,-case-missing-default"))))
 
+;; Add jedi for python mode
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '(python-mode . ("/opt/homebrew/bin/jedi-language-server"))))
+
+(defun open-config-file()
+  "Open config file."
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+
+;; Open that config file
+(global-unset-key (kbd "C-h C-c"))
+(global-set-key (kbd "C-h C-c") 'open-config-file)
+
+;; Enable global company mode
+(global-company-mode)
+
+;; Set commands to move between paragraphs
+(global-set-key (kbd "s-<up>") 'backward-paragraph)
+(global-set-key (kbd "s-<down>") 'forward-paragraph)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(company eglot-inactive-regions vterm)))
+ '(custom-safe-themes
+   '("daa27dcbe26a280a9425ee90dc7458d85bd540482b93e9fa94d4f43327128077"
+     default))
+ '(package-selected-packages
+   '(company dape eglot-inactive-regions kanagawa-themes mood-line
+             python-mode ultra-scroll verilog-ts-mode vterm))
+ '(package-vc-selected-packages
+   '((ultra-scroll :vc-backend Git :url
+                   "https://github.com/jdtsmith/ultra-scroll")))
+ '(verilog-indent-level 4)
+ '(verilog-indent-level-behavioral 4)
+ '(verilog-indent-level-declaration 4)
+ '(verilog-indent-level-module 4)
+ '(verilog-tab-always-indent nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
