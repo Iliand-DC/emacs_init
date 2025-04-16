@@ -11,9 +11,6 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
-(display-line-numbers-mode)
-(setq-default display-line-numbers-type t)
-
 ;; Enable vterm
 (use-package vterm
   :ensure t)
@@ -21,8 +18,14 @@
 ;; Enable cua mode by default to normal C+c, C+v
 (cua-mode t)
 
+;; Load evil mode, cause i'm vimloved
+(evil-mode)
+
 ;; Load fancy default theme
-(load-theme 'kanagawa-wave)
+(use-package kanagawa-themes
+  :ensure t
+  :config
+  (load-theme 'kanagawa-wave t))
 
 ;; Maximize window at startup
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
@@ -40,8 +43,11 @@
 ;; Set cursor style to fancy bar
 (setq-default cursor-type 'bar)
 
+(global-set-key (kbd "s-v") 'vterm-yank)
+(global-set-key (kbd "C-v") 'vterm-yank)
+
 ;; Setup font
-(set-face-attribute 'default nil :height 130)
+(set-face-attribute 'default nil :height 200)
 
 ;; Set tab to insert tab, btw
 (global-set-key (kbd "TAB") 'tab-to-tab-stop)
@@ -80,10 +86,9 @@
 
 ;; Define kbd to kill buffer
 (global-set-key (kbd "s-k") 'kill-current-buffer)
+(global-set-key (kbd "M-k") 'kill-current-buffer)
 
 (treemacs-resize-icons 15)
-(define-key treemacs-mode-map (kbd "<left>") 'treemacs-COLLAPSE-action)
-(define-key treemacs-mode-map (kbd "<right>") 'treemacs-RET-action)
 
 ;; Verilog mode disable auto formatting
 (eval-after-load 'verilog-mode
@@ -125,6 +130,16 @@
 ;; Set commands to move between paragraphs
 (global-set-key (kbd "s-<up>") 'backward-paragraph)
 (global-set-key (kbd "s-<down>") 'forward-paragraph)
+(global-set-key (kbd "M-<up>") 'backward-paragraph)
+(global-set-key (kbd "M-<down>") 'forward-paragraph)
+
+
+;; Redefine behaviour of <end>, <home> keys
+(global-unset-key (kbd "<end>"))
+(global-unset-key (kbd "<home>"))
+(global-set-key (kbd "<end>") 'end-of-line)
+(global-set-key (kbd "<home>") 'beginning-of-line)
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -135,8 +150,8 @@
    '("daa27dcbe26a280a9425ee90dc7458d85bd540482b93e9fa94d4f43327128077"
      default))
  '(package-selected-packages
-   '(company dape eglot-inactive-regions kanagawa-themes mood-line
-             python-mode ultra-scroll verilog-ts-mode vterm))
+   '(company dape eglot-inactive-regions evil-surround kanagawa-themes
+             mood-line python-mode ultra-scroll verilog-ts-mode vterm))
  '(package-vc-selected-packages
    '((ultra-scroll :vc-backend Git :url
                    "https://github.com/jdtsmith/ultra-scroll")))
