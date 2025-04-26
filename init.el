@@ -11,6 +11,31 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
+
+(ivy-mode)
+
+
+(global-evil-leader-mode)
+(evil-leader/set-leader "<SPC>")
+
+
+(evil-leader/set-key
+  "pf" 'projectile-find-file
+  "b" 'ibuffer
+  "k" 'kill-current-buffer
+  "p?" 'projectile-ripgrep
+  "<SPC>" 'fzf
+  "t" 'vterm
+  "pt" 'projectile--vterm
+  "f" 'find-file
+  "/" 'comment-line)
+
+
+
+(global-set-key (kbd "C-x C-a") 'eval-buffer)
+
+
+
 ;; Enable vterm
 (use-package vterm
   :ensure t)
@@ -18,14 +43,26 @@
 ;; Enable cua mode by default to normal C+c, C+v
 (cua-mode t)
 
+
+(global-set-key (kbd "M-p") 'ace-window)
+(ace-window-display-mode)
+(ace-window-posframe-mode)
+
+
 ;; Load evil mode, cause i'm vimloved
-(evil-mode)
+;; (evil-mode)
 
 ;; Load fancy default theme
 (use-package kanagawa-themes
   :ensure t
   :config
   (load-theme 'kanagawa-wave t))
+
+
+(use-package doom-themes
+  :ensure t
+  :config
+  (load-theme 'doom-one t))
 
 ;; Maximize window at startup
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
@@ -47,7 +84,7 @@
 (global-set-key (kbd "C-v") 'vterm-yank)
 
 ;; Setup font
-(set-face-attribute 'default nil :height 200)
+(set-face-attribute 'default nil :height 170)
 
 ;; Set tab to insert tab, btw
 (global-set-key (kbd "TAB") 'tab-to-tab-stop)
@@ -73,7 +110,11 @@
         (replace-match "")))))
 
 ;; Define backtab key
-(global-set-key (kbd "<backtab>") 'un-indent-by-removing-4-spaces)
+;; (global-set-key (kbd "<backtab>") 'un-indent-by-removing-4-spaces)
+
+
+(global-set-key (kbd "<backtab>") 'indent-rigidly-left-to-tab-stop)
+
 
 ;; Enable mood-line
 (mood-line-mode t)
@@ -149,9 +190,12 @@
  '(custom-safe-themes
    '("daa27dcbe26a280a9425ee90dc7458d85bd540482b93e9fa94d4f43327128077"
      default))
+ '(dired-kill-when-opening-new-dired-buffer t)
  '(package-selected-packages
-   '(company dape eglot-inactive-regions evil-surround kanagawa-themes
-             mood-line python-mode ultra-scroll verilog-ts-mode vterm))
+   '(company dape doom-themes eglot-inactive-regions evil-leader
+             evil-surround fzf ivy kanagawa-themes lua-mode mood-line
+             projectile projectile-ripgrep python-mode rust-mode
+             ultra-scroll verilog-ts-mode vterm zig-mode))
  '(package-vc-selected-packages
    '((ultra-scroll :vc-backend Git :url
                    "https://github.com/jdtsmith/ultra-scroll")))
