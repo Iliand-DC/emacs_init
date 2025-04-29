@@ -1,0 +1,1 @@
+("~/python/reg_block_insert/" "~/python/svd2pyuvmregs/" "~/python/svd_to_yaml/" "~/python/svd_editor_ng/" "~/python/ball_map_planner_gui/")

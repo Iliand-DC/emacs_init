@@ -1,0 +1,5 @@
+* Default
+** reg_block_insert
+ - path :: ~/python/reg_block_insert
+** i2c
+ - path :: ~/systemverilog/i2c
