@@ -51,6 +51,10 @@
 
 
 
+(global-set-key (kbd "C-<tab>") 'indent-rigidly)
+
+
+
 (use-package vterm
   :ensure t
   :config
@@ -65,14 +69,22 @@
 (use-package doom-themes
   :ensure t
   :config
-  (load-theme 'doom-one-light t))
+  (load-theme 'doom-badger t))
 
 
 
+;; (use-package kanagawa-themes
+;;   :ensure t
+;;   :config
+;;   (load-theme 'kanagawa-wave t))
 
 
 
-(setq-default eldoc-box-hover-at-point-mode t)
+(use-package eldoc-box
+  :ensure t
+  :config
+  (setq-default eldoc-box-hover-at-point-mode t)
+  (setq-default eldoc-box-max-pixel-height 80))
 
 
 
@@ -193,7 +205,7 @@
 
 
 (global-unset-key (kbd "C-x f"))
-(global-set-key (kbd "C-x f") 'fzf)
+(global-set-key (kbd "C-x f") 'fzf-projectile)
 
 
 
@@ -201,9 +213,11 @@
 
 
 
+(global-unset-key (kbd "M-k"))
 (global-set-key (kbd "M-p") 'ace-window)
+(global-set-key (kbd "M-k") 'ace-delete-window)
 (ace-window-display-mode)
-(ace-window-posframe-mode)
+;; (ace-window-posframe-mode)
 
 
 
@@ -224,7 +238,7 @@
         ;; the mode's map (see verilog-mode.el)
         (define-key verilog-mode-map (kbd ";") 'self-insert-command)
         (define-key verilog-mode-map (kbd ":") 'self-insert-command)
-        (define-key verilog-mode-map (kbd "RET") 'electric-indent-just-newline)
+        (define-key verilog-mode-map (kbd "RET") 'newline-and-indent)
         (define-key verilog-mode-map (kbd "TAB") 'tab-to-tab-stop)
         (define-key verilog-mode-map (kbd "`") 'self-insert-command)
         (define-key verilog-mode-map (kbd "C-M-f") 'forward-sexp)
@@ -279,6 +293,15 @@
 
 
 
+(use-package multiple-cursors
+  :ensure t
+  :config
+  (multiple-cursors-mode)
+  (global-set-key (kbd "M-S-<up>") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "M-S-<down>") 'mc/mark-next-like-this))
+
+
+
 (use-package treemacs
   :ensure t
   :config
@@ -304,7 +327,10 @@
  ;; If there is more than one, they won't work right.
  '(buffer-face-mode-face '(:family "JetBrainsMono Nerd Font" : height 110))
  '(custom-safe-themes
-   '("0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1"
+   '("4d5d11bfef87416d85673947e3ca3d3d5d985ad57b02a7bb2e32beaf785a100e"
+     "b5fd9c7429d52190235f2383e47d340d7ff769f141cd8f9e7a4629a81abc6b19"
+     "456697e914823ee45365b843c89fbc79191fdbaff471b29aad9dcbe0ee1d5641"
+     "0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1"
      "daa27dcbe26a280a9425ee90dc7458d85bd540482b93e9fa94d4f43327128077"
      "c20728f5c0cb50972b50c929b004a7496d3f2e2ded387bf870f89da25793bb44"
      "d2ab3d4f005a9ad4fb789a8f65606c72f30ce9d281a9e42da55f7f4b9ef5bfc6"
@@ -324,7 +350,8 @@
  '(package-selected-packages
    '(all-the-icons centaur-tabs company dape eglot-inactive-regions
                    eldoc-box fzf ivy kanagawa-themes modern-tab-bar
-                   mood-line treemacs-tab-bar ultra-scroll vterm
+                   mood-line multiple-cursors treemacs-tab-bar
+                   ultra-scroll verilog-ext verilog-ts-mode vterm
                    yaml-mode yasnippet zig-mode zig-ts-mode))
  '(package-vc-selected-packages
    '((modern-tab-bar :vc-backend Git :url
