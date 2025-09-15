@@ -1,0 +1,1 @@
+("~/projects/python/android_app/" "~/projects/python/reflex_app/")
