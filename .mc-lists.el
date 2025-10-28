@@ -3,8 +3,7 @@
 
 (setq mc/cmds-to-run-for-all
       '(
-        help-for-help
-        multiple-cursors-mode
+        eval-buffer
         ))
 
 (setq mc/cmds-to-run-once
