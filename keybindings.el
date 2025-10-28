@@ -12,8 +12,8 @@
 (global-set-key (kbd "C-f") 'isearch-forward)
 (define-key isearch-mode-map (kbd "C-f") 'isearch-repeat-forward)
 
-(global-set-key (kbd "C-f") 'isearch-backward)
-(define-key isearch-mode-map (kbd "C-f") 'isearch-repeat-backward)
+(global-set-key (kbd "C-S-f") 'isearch-backward)
+(define-key isearch-mode-map (kbd "C-S-f") 'isearch-repeat-backward)
 
 
 (global-set-key (kbd "C-x C-a") 'eval-buffer)

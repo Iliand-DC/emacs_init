@@ -91,6 +91,17 @@
   (global-set-key (kbd "C-M-<down>") 'windmove-down))
 
 
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook))
+
+
+(use-package tokyonight-themes
+  :vc (:url "https://github.com/xuchengpeng/tokyonight-themes")
+  :config
+  (load-theme 'tokyonight-moon :no-confirm))
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -98,9 +109,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(buffer-face-mode-face '(:family "JetBrainsMono Nerd Font" : height 130))
- '(custom-enabled-themes '(modus-vivendi-tinted))
+ '(custom-enabled-themes '(tokyonight-storm))
  '(custom-safe-themes
-   '("8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a"
+   '("22d73dce2d6712154900097ac8f9146c51deea66a92a2406c8c3f341ee9eb30a"
+     "0ca4a8417a19ecbbf4538550b90424bf11d5e8caff99c605165cf0a058b52fef"
+     "a7d492b6d2d0940ef70f376e82e94144c2493a5a687c514f607a45587920f803"
+     "c9aac9e4be9968088ce5117887ebf74da92b4eb5f3f67009a99516056f774916"
+     "f4d1b183465f2d29b7a2e9dbe87ccc20598e79738e5d29fc52ec8fb8c576fcfd"
+     "48042425e84cd92184837e01d0b4fe9f912d875c43021c3bcb7eeb51f1be5710"
+     "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8"
+     "8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a"
      "13096a9a6e75c7330c1bc500f30a8f4407bd618431c94aeab55c9855731a95e1"
      "6bf350570e023cd6e5b4337a6571c0325cec3f575963ac7de6832803df4d210a"
      "5e39e95c703e17a743fb05a132d727aa1d69d9d2c9cde9353f5350e545c793d4"
@@ -143,21 +161,10 @@
                   move print shell symlink touch uncompress))
  '(dired-switches-in-mode-line 'as-is)
  '(list-directory-verbose-switches "-al")
- '(package-selected-packages
-   '(all-the-icons centaur-tabs company dap-mode dape
-                   eglot-inactive-regions eldoc-box ergoemacs-mode fzf
-                   ivy kanagawa-themes modern-tab-bar mood-line
-                   multiple-cursors neotree tokyo-theme treemacs-evil
-                   treemacs-tab-bar ultra-scroll verilog-ext
-                   verilog-ts-mode vterm yaml-mode yasnippet zig-mode
-                   zig-ts-mode))
+ '(package-selected-packages nil)
  '(package-vc-selected-packages
-   '((tokyo-theme :vc-backend Git :url
-                  "https://github.com/rawleyfowler/tokyo-theme.el")
-     (modern-tab-bar :vc-backend Git :url
-                     "https://github.com/aaronjensen/emacs-modern-tab-bar.git")
-     (ultra-scroll :vc-backend Git :url
-                   "https://github.com/jdtsmith/ultra-scroll")))
+   '((minimal-dashboard :url
+                        "https://github.com/dheerajshenoy/minimal-dashboard.el")))
  '(treemacs-move-files-by-mouse-dragging t)
  '(verilog-auto-newline nil)
  '(verilog-indent-level 0)
@@ -172,12 +179,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(evil-goggles-change-face ((t (:inherit diff-removed))))
- '(evil-goggles-delete-face ((t (:inherit diff-removed))))
- '(evil-goggles-paste-face ((t (:inherit diff-added))))
- '(evil-goggles-undo-redo-add-face ((t (:inherit diff-added))))
- '(evil-goggles-undo-redo-change-face ((t (:inherit diff-changed))))
- '(evil-goggles-undo-redo-remove-face ((t (:inherit diff-removed))))
- '(evil-goggles-yank-face ((t (:inherit diff-changed))))
+ '(ansi-color-bright-white ((t (:background "white" :foreground "white"))))
+ '(ansi-color-white ((t (:background "white" :foreground "white"))))
  '(tab-bar ((t (:inherit mode-line)))))
 (put 'scroll-left 'disabled nil)

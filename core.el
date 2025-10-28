@@ -97,3 +97,5 @@
 (add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
 
 (setq-default hs-minor-mode t)
+
+(global-hl-line-mode)
