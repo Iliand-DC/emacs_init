@@ -99,3 +99,7 @@
 (setq-default hs-minor-mode t)
 
 (global-hl-line-mode)
+
+(setq scroll-conservatively 101)
+
+(setq scroll-preserve-screen-position t)
