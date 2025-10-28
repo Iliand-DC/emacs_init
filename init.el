@@ -1,43 +1,13 @@
 ;; Enable melpa packages
 (require 'package)
+(load-file ".emacs.d/core.el")
+(load-file ".emacs.d/keybindings.el")
+(load-file ".emacs.d/languages.el")
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
 ;; and `package-pinned-packages`. Most users will not need or want to do this.
 ;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
-
-;; Disable ugly ui
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-
-
-;; Maximize window at startup
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
-
-
-(setq-default truncate-lines t)
-
-
-
-(global-set-key (kbd "C-c r") 'eglot-rename)
-
-
-;; No more typing the whole yes or no. Just y or n will do.
-(fset 'yes-or-no-p 'y-or-n-p)
-
-
-(global-set-key (kbd "C-<tab>") 'indent-rigidly)
-
-
-(global-unset-key (kbd "C-s"))
-(global-unset-key (kbd "C-x C-s"))
-
-
-(global-set-key (kbd "C-s") 'save-buffer)
-(global-set-key (kbd "C-f") 'isearch-forward)
-(define-key isearch-mode-map (kbd "C-f") 'isearch-repeat-forward)
-
-(pixel-scroll-precision-mode t)
 
 
 (use-package vterm
@@ -53,26 +23,11 @@
   (global-set-key (kbd "C-e") 'neotree-show))
 
 
-;; Enable cua mode by default to normal C+c, C+v
-(cua-mode t)
-
 (use-package eldoc-box
   :ensure t
   :config
-  (setq-default eldoc-box-hover-at-point-mode t)
+  (setq-default eldoc-box-hover-mode t)
   (setq-default eldoc-box-max-pixel-height 80))
-
-
-(add-to-list 'auto-mode-alist '("\\.s?vh?\\'" . verilog-ts-mode))
-
-(global-set-key (kbd "C-x C-a") 'eval-buffer)
-
-
-;; Disable annoyning bell
-(setq ring-bell-function 'ignore)
-
-
-(centaur-tabs-mode)
 
 
 (defun open-term()
@@ -81,175 +36,11 @@
   (windmove-display-down)
   (projectile-run-vterm))
 
-(global-set-key (kbd "C-x C-o") 'open-term)
-
-(global-set-key (kbd "<backtab>") 'indent-rigidly-left-to-tab-stop)
-
-;; Makes *scratch* empty.
-(setq initial-scratch-message "")
-
-;; Removes *scratch* from buffer after the mode has been set.
-(defun remove-scratch-buffer ()
-  (if (get-buffer "*scratch*")
-      (kill-buffer "*scratch*")))
-(add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
-
-;; Removes *messages* from the buffer.
-(setq-default message-log-max nil)
-
-
-;; Removes *Completions* from buffer after you've opened a file.
-(add-hook 'minibuffer-exit-hook
-      '(lambda ()
-         (let ((buffer "*Completions*"))
-           (and (get-buffer buffer)
-                (kill-buffer buffer)))))
-
-;; Don't show *Buffer list* when opening multiple files at the same time.
-(setq inhibit-startup-buffer-menu t)
-
-;; Show only one active window when opening multiple files at the same time.
-(add-hook 'window-setup-hook 'delete-other-windows)
-
-
-;; Enable mood line
-(mood-line-mode)
-
-
-
-;; Hints about keys
-(which-key-mode)
-
-;; Set cursor style to fancy bar
-(setq-default cursor-type 'bar)
-
-;; Set tab to insert tab, btw
-(global-set-key (kbd "TAB") 'tab-to-tab-stop)
-
-;; Enable better buffer control unit
-(global-unset-key (kbd "C-x C-b"))
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
-;; Open vterm
-(global-set-key (kbd "C-x C-\\") 'vterm)
-
-
-(global-unset-key (kbd "C-x C-;"))
-(global-set-key (kbd "C-;") 'comment-line)
-
-
-(global-set-key (kbd "C-w") 'kill-current-buffer)
-
-
-(global-unset-key (kbd "C-a"))
-(global-set-key (kbd "C-a") 'avy-goto-char)
-
-
-;; Set default font bigger
-(set-frame-font "JetBrainsMono Nerd Font 12" nil t)
-
-(setq buffer-face-mode-face '(:family "JetBrainsMono Nerd Font": height 110))
-(buffer-face-mode t)
-
-;; Function that will delete 4 spaces
-(defun un-indent-by-removing-4-spaces ()
-  "Remove 4 spaces from beginning of of line."
-  (interactive)
-  (save-excursion
-    (save-match-data
-      (beginning-of-line)
-      ;; get rid of tabs at beginning of line
-      (when (looking-at "^\\s-+")
-        (untabify (match-beginning 0) (match-end 0)))
-      (when (looking-at "^    ")
-        (replace-match "")))))
-
-;; define backtab key
-(global-set-key (kbd "<backtab>") 'un-indent-by-removing-4-spaces)
-
-;; setup indentation
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-
-;; define kbd to kill buffer
-(global-set-key (kbd "s-k") 'kill-current-buffer)
 
 (defun open-config-file()
   "Quick open this config file."
   (interactive)
   (find-file "~/.emacs.d/init.el"))
-
-;; Set open config kbd
-(global-set-key (kbd "C-h C-c") 'open-config-file)
-
-
-(global-unset-key (kbd "C-x f"))
-(global-set-key (kbd "C-x f") 'fzf-projectile)
-
-
-
-(ivy-mode)
-
-
-
-(global-unset-key (kbd "M-k"))
-(global-set-key (kbd "M-p") 'ace-window)
-(global-set-key (kbd "M-k") 'ace-delete-window)
-(ace-window-display-mode)
-;; (ace-window-posframe-mode)
-
-
-;; Disable treemacs line numbers
-(add-hook 'treemacs-mode-hook (lambda() (display-line-numbers-mode -1)))
-
-
-(setq backup-directory-alist '((".*" . "~/.Trash")))
-
-
-
-;; Disable warnings on startup
-(setq warning-minimum-level :error)
-
-;; Enable company mode by default
-(global-company-mode)
-
-;; Verilog mode disable auto formatting
-(eval-after-load 'verilog-mode
-    '(progn
-        ;; same for all the electric-verilog-* commands in
-        ;; the mode's map (see verilog-mode.el)
-        (define-key verilog-mode-map (kbd ";") 'self-insert-command)
-        (define-key verilog-mode-map (kbd ":") 'self-insert-command)
-        (define-key verilog-mode-map (kbd "RET") 'newline-and-indent)
-        (define-key verilog-mode-map (kbd "TAB") 'tab-to-tab-stop)
-        (define-key verilog-mode-map (kbd "`") 'self-insert-command)
-        (define-key verilog-mode-map (kbd "C-M-f") 'forward-sexp)
-        (define-key verilog-mode-map (kbd "C-M-b") 'backward-sexp)
-        (define-key verilog-mode-map (kbd "C-;") 'self-insert-command)
-        (define-key verilog-mode-map (kbd "M-RET") 'newline)))
-
-(eval-after-load 'verilog-ts-mode
-    '(progn
-        ;; same for all the electric-verilog-* commands in
-        ;; the mode's map (see verilog-mode.el)
-        (define-key verilog-ts-mode-map (kbd ";") 'self-insert-command)
-        (define-key verilog-ts-mode-map (kbd ":") 'self-insert-command)
-        (define-key verilog-ts-mode-map (kbd "RET") 'newline-and-indent)
-        (define-key verilog-ts-mode-map (kbd "TAB") 'tab-to-tab-stop)
-        (define-key verilog-ts-mode-map (kbd "`") 'self-insert-command)
-        (define-key verilog-ts-mode-map (kbd "C-M-f") 'forward-sexp)
-        (define-key verilog-ts-mode-map (kbd "C-M-b") 'backward-sexp)
-        (define-key verilog-ts-mode-map (kbd "C-;") 'self-insert-command)
-        (define-key verilog-ts-mode-map (kbd "M-RET") 'newline)))
-
-
-(global-display-line-numbers-mode)
-
-
-
-(global-set-key (kbd "TAB") 'tab-to-tab-stop)
-
-
 
 
 (defun insert-line-above ()
@@ -259,37 +50,6 @@
     (end-of-line 0)
     (open-line 1)))
 
-(global-set-key (kbd "C-c N") 'insert-line-below)
-
-
- ;; Set veridian as lsp for verilog
-(with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs
-               '(verilog-mode . ("veridian"))))
-
-(with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs
-               '(verilog-ts-mode . ("veridian"))))
-
-;; Set jedi ls to python mode
-(with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs
-	           '(python-mode . ("jedi-language-server"))))
-
-
-(setq-default hs-minor-mode t)
-
-(add-hook 'python-mode-hook 'eglot-ensure)
-(add-hook 'python-mode-hook #'eldoc-box-hover-at-point-mode t)
-
-(add-hook 'verilog-mode-hook 'eglot-ensure)
-
-(set-default 'truncate-long-lines t)
-
-
-(global-unset-key (kbd "C-x C-p"))
-
-
 
 (use-package multiple-cursors
   :ensure t
@@ -297,7 +57,6 @@
   (multiple-cursors-mode)
   (global-set-key (kbd "M-S-<up>") 'mc/mark-previous-like-this)
   (global-set-key (kbd "M-S-<down>") 'mc/mark-next-like-this))
-
 
 
 (use-package treemacs
@@ -309,7 +68,6 @@
   (treemacs-resize-icons 15))
 
 
-
 (use-package neotree
   :ensure t
   :config
@@ -317,12 +75,20 @@
   (add-hook 'neotree-mode-hook (lambda() (display-line-numbers-mode -1))))
 
 
-
 (use-package centaur-tabs
   :ensure t
   :config
   (global-set-key (kbd "M-<up>") 'centaur-tabs-backward-tab)
   (global-set-key (kbd "M-<down>") 'centaur-tabs-forward-tab))
+
+
+(use-package windmove
+  :ensure t
+  :config
+  (global-set-key (kbd "C-M-<up>") 'windmove-up)
+  (global-set-key (kbd "C-M-<left>") 'windmove-left)
+  (global-set-key (kbd "C-M-<right>") 'windmove-right)
+  (global-set-key (kbd "C-M-<down>") 'windmove-down))
 
 
 
