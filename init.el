@@ -15,7 +15,8 @@
   :config
   (define-key vterm-mode-map (kbd "C-S-v") 'vterm-yank)
   (add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode -1)))
-  (add-hook 'vterm-mode-hook 'centaur-tabs-local-mode))
+  (add-hook 'vterm-mode-hook 'centaur-tabs-local-mode)
+  (define-key vterm-mode-map (kbd "C-d") '(lambda() (interactive) (vterm--self-insert) (delete-window))))
 
 
 (use-package neotree
