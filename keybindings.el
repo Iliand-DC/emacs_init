@@ -18,16 +18,16 @@
 
 (global-set-key (kbd "C-x C-a") 'eval-buffer)
 
-(global-set-key (kbd "C-x C-o") 'open-term)
+(global-set-key (kbd "C-x C-o") 'projectile-open-term)
 
 (global-set-key (kbd "<backtab>") 'indent-rigidly-left-to-tab-stop)
 
 
-(global-unset-key (kbd "C-\\"))
-(global-set-key (kbd "C-\\") 'split-window-right)
+(global-unset-key (kbd "M-\\"))
+(global-set-key (kbd "M-\\") 'split-window-right)
 
-(global-unset-key (kbd "C--"))
-(global-set-key (kbd "C--") 'split-window-below)
+(global-unset-key (kbd "M--"))
+(global-set-key (kbd "M--") 'split-window-below)
 
 (global-set-key (kbd "M-w") 'delete-window)
 
@@ -39,11 +39,11 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Open vterm
-(global-set-key (kbd "C-x C-\\") 'vterm)
+(global-set-key (kbd "C-x C-\\") 'open-term)
 
 
 (global-unset-key (kbd "C-x C-;"))
-(global-set-key (kbd "C-;") 'comment-line)
+(define-key prog-mode-map (kbd "C-;") 'comment-line )
 
 
 (global-set-key (kbd "C-w") 'kill-current-buffer)
@@ -73,3 +73,4 @@
 
 (global-unset-key (kbd "C-x C-p"))
 
+(global-set-key (kbd "C-d") 'surround-insert)

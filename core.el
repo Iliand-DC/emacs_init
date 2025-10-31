@@ -1,3 +1,53 @@
+(defun text-scale-once ()
+  "Scale down buffer"
+  (interactive)
+  (progn
+    (text-scale-adjust 0)
+    (text-scale-decrease 1)))
+
+
+(defun projectile-open-term()
+  "Open terminal in a splitted below window in project dir."
+  (interactive)
+  (windmove-display-down)
+  (projectile-run-vterm))
+
+
+(defun open-term()
+  "Open terminal in a splitted below window."
+  (interactive)
+  (windmove-display-down)
+  (vterm))
+
+
+(defun open-config-file()
+  "Quick open this config file."
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+
+
+(defun insert-line-above ()
+  "Insert an empty line above the current line."
+  (interactive)
+  (save-excursion
+    (end-of-line 0)
+    (open-line 1)))
+
+
+;; Function that will delete 4 spaces
+(defun un-indent-by-removing-4-spaces ()
+  "Remove 4 spaces from beginning of of line."
+  (interactive)
+  (save-excursion
+    (save-match-data
+      (beginning-of-line)
+      ;; get rid of tabs at beginning of line
+      (when (looking-at "^\\s-+")
+        (untabify (match-beginning 0) (match-end 0)))
+      (when (looking-at "^    ")
+        (replace-match "")))))
+
+
 ;; Disable ugly ui
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -56,18 +106,6 @@
 (setq buffer-face-mode-face '(:family "JetBrainsMono Nerd Font": height 110))
 (buffer-face-mode t)
 
-;; Function that will delete 4 spaces
-(defun un-indent-by-removing-4-spaces ()
-  "Remove 4 spaces from beginning of of line."
-  (interactive)
-  (save-excursion
-    (save-match-data
-      (beginning-of-line)
-      ;; get rid of tabs at beginning of line
-      (when (looking-at "^\\s-+")
-        (untabify (match-beginning 0) (match-end 0)))
-      (when (looking-at "^    ")
-        (replace-match "")))))
 
 ;; setup indentation
 (setq-default indent-tabs-mode nil)
@@ -94,7 +132,8 @@
 (defun remove-scratch-buffer ()
   (if (get-buffer "*scratch*")
       (kill-buffer "*scratch*")))
-(add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
+
+;; (add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
 
 (setq-default hs-minor-mode t)
 
@@ -103,3 +142,22 @@
 (setq scroll-conservatively 101)
 
 (setq scroll-preserve-screen-position t)
+
+;; search selected text
+(defadvice isearch-mode (around isearch-mode-default-string (forward &optional regexp op-fun recursive-edit word-p) activate)
+  (if (and transient-mark-mode mark-active (not (eq (mark) (point))))
+      (progn
+        (isearch-update-ring (buffer-substring-no-properties (mark) (point)))
+        (deactivate-mark)
+        ad-do-it
+        (if (not forward)
+            (isearch-repeat-backward)
+          (goto-char (mark))
+          (isearch-repeat-forward)))
+    ad-do-it))
+
+(electric-pair-mode)
+
+(add-hook 'write-file-hooks 'delete-trailing-whitespace)
+
+(context-menu-mode)

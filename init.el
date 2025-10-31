@@ -1,8 +1,8 @@
 ;; Enable melpa packages
 (require 'package)
-(load-file ".emacs.d/core.el")
-(load-file ".emacs.d/keybindings.el")
-(load-file ".emacs.d/languages.el")
+(load-file "~/.emacs.d/core.el")
+(load-file "~/.emacs.d/keybindings.el")
+(load-file "~/.emacs.d/languages.el")
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
 ;; and `package-pinned-packages`. Most users will not need or want to do this.
@@ -13,7 +13,9 @@
 (use-package vterm
   :ensure t
   :config
-  (define-key vterm-mode-map (kbd "C-S-v") 'vterm-yank))
+  (define-key vterm-mode-map (kbd "C-S-v") 'vterm-yank)
+  (add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode -1)))
+  (add-hook 'vterm-mode-hook 'centaur-tabs-local-mode))
 
 
 (use-package neotree
@@ -28,27 +30,6 @@
   :config
   (setq-default eldoc-box-hover-mode t)
   (setq-default eldoc-box-max-pixel-height 80))
-
-
-(defun open-term()
-  "Open terminal in a splitted below window."
-  (interactive)
-  (windmove-display-down)
-  (projectile-run-vterm))
-
-
-(defun open-config-file()
-  "Quick open this config file."
-  (interactive)
-  (find-file "~/.emacs.d/init.el"))
-
-
-(defun insert-line-above ()
-  "Insert an empty line above the current line."
-  (interactive)
-  (save-excursion
-    (end-of-line 0)
-    (open-line 1)))
 
 
 (use-package multiple-cursors
@@ -72,7 +53,8 @@
   :ensure t
   :config
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  (add-hook 'neotree-mode-hook (lambda() (display-line-numbers-mode -1))))
+  (add-hook 'neotree-mode-hook (lambda() (display-line-numbers-mode -1)))
+  (add-hook 'neo-after-create-hook (lambda (_)(if (display-graphic-p) (call-interactively 'text-scale-once)))))
 
 
 (use-package centaur-tabs
@@ -97,10 +79,18 @@
   (dashboard-setup-startup-hook))
 
 
-(use-package tokyonight-themes
-  :vc (:url "https://github.com/xuchengpeng/tokyonight-themes")
+(use-package git-gutter
+  :ensure t
   :config
-  (load-theme 'tokyonight-moon :no-confirm))
+  (global-git-gutter-mode))
+
+
+(use-package git-gutter-fringe
+  :ensure t
+  :config
+  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
 
 
 (custom-set-variables
@@ -109,9 +99,42 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(buffer-face-mode-face '(:family "JetBrainsMono Nerd Font" : height 130))
- '(custom-enabled-themes '(doom-tokyo-night))
+ '(custom-enabled-themes '(doom-challenger-deep))
  '(custom-safe-themes
-   '("e8bd9bbf6506afca133125b0be48b1f033b1c8647c628652ab7a2fe065c10ef0"
+   '("6e18353d35efc18952c57d3c7ef966cad563dc65a2bba0660b951d990e23fc07"
+     "10e5d4cc0f67ed5cafac0f4252093d2119ee8b8cb449e7053273453c1a1eb7cc"
+     "c5878086e65614424a84ad5c758b07e9edcf4c513e08a1c5b1533f313d1b17f1"
+     "ff24d14f5f7d355f47d53fd016565ed128bf3af30eb7ce8cae307ee4fe7f3fd0"
+     "df6dfd55673f40364b1970440f0b0cb8ba7149282cf415b81aaad2d98b0f0290"
+     "2771ec93656faf267521dce9ffe1a6ad88cd0bea87aa0e8c4fc80bf355c58c1d"
+     "dd4582661a1c6b865a33b89312c97a13a3885dc95992e2e5fc57456b4c545176"
+     "691d671429fa6c6d73098fc6ff05d4a14a323ea0a18787daeb93fde0e48ab18b"
+     "a9eeab09d61fef94084a95f82557e147d9630fbbb82a837f971f83e66e21e5ad"
+     "e14884c30d875c64f6a9cdd68fe87ef94385550cab4890182197b95d53a7cf40"
+     "32f22d075269daabc5e661299ca9a08716aa8cda7e85310b9625c434041916af"
+     "02d422e5b99f54bd4516d4157060b874d14552fe613ea7047c4a5cfa1288cf4f"
+     "8c7e832be864674c220f9a9361c851917a93f921fedb7717b1b5ece47690c098"
+     "f64189544da6f16bab285747d04a92bd57c7e7813d8c24c30f382f087d460a33"
+     "ffafb0e9f63935183713b204c11d22225008559fa62133a69848835f4f4a758c"
+     "e1f4f0158cd5a01a9d96f1f7cdcca8d6724d7d33267623cc433fe1c196848554"
+     "4e2e42e9306813763e2e62f115da71b485458a36e8b4c24e17a2168c45c9cf9d"
+     "9e36779f5244f7d715d206158a3dade839d4ccb17f6a2f0108bf8d476160a221"
+     "da75eceab6bea9298e04ce5b4b07349f8c02da305734f7c0c8c6af7b5eaa9738"
+     "2721b06afaf1769ef63f942bf3e977f208f517b187f2526f0e57c1bd4a000350"
+     "452068f2985179294c73c5964c730a10e62164deed004a8ab68a5d778a2581da"
+     "6a5584ee8de384f2d8b1a1c30ed5b8af1d00adcbdcd70ba1967898c265878acf"
+     "a6920ee8b55c441ada9a19a44e9048be3bfb1338d06fc41bce3819ac22e4b5a1"
+     "9013233028d9798f901e5e8efb31841c24c12444d3b6e92580080505d56fd392"
+     "571661a9d205cb32dfed5566019ad54f5bb3415d2d88f7ea1d00c7c794e70a36"
+     "c8c4baac2988652a760554e0e7ce11a0fe0f8468736be2b79355c9d9cc14b751"
+     "7758a8b8912ef92e8950a4df461a4d510484b11df0d7195a8a3d003965127abc"
+     "350fef8767e45b0f81dd54c986ee6854857f27067bac88d2b1c2a6fa7fecb522"
+     "3c08da65265d80a7c8fc99fe51df3697d0fa6786a58a477a1b22887b4f116f62"
+     "2b20b4633721cc23869499012a69894293d49e147feeb833663fdc968f240873"
+     "30d174000ea9cbddecd6cc695943afb7dba66b302a14f9db5dd65074e70cc744"
+     "b754d3a03c34cfba9ad7991380d26984ebd0761925773530e24d8dd8b6894738"
+     "d481904809c509641a1a1f1b1eb80b94c58c210145effc2631c1a7f2e4a2fdf4"
+     "e8bd9bbf6506afca133125b0be48b1f033b1c8647c628652ab7a2fe065c10ef0"
      "1f292969fc19ba45fbc6542ed54e58ab5ad3dbe41b70d8cb2d1f85c22d07e518"
      "7e377879cbd60c66b88e51fad480b3ab18d60847f31c435f15f5df18bdb18184"
      "77fff78cc13a2ff41ad0a8ba2f09e8efd3c7e16be20725606c095f9a19c24d3d"
@@ -175,7 +198,17 @@
                   move print shell symlink touch uncompress))
  '(dired-switches-in-mode-line 'as-is)
  '(list-directory-verbose-switches "-al")
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(all-the-icons async bui centaur-tabs company dap-mode dashboard
+                   doom-themes eglot-inactive-regions eldoc-box
+                   flycheck fzf git-gutter-fringe ivy magit
+                   magit-section markdown-mode mood-line moody
+                   multiple-cursors neotree outshine projectile
+                   pythonic right-click-context ripgrep ruff-format
+                   scala-mode scala-ts-mode spinner surround transient
+                   treemacs-tab-bar typst-ts-mode ultra-scroll
+                   verilog-ts-mode vterm with-editor yaml yaml-mode
+                   yasnippet zig-mode zig-ts-mode))
  '(package-vc-selected-packages
    '((minimal-dashboard :url
                         "https://github.com/dheerajshenoy/minimal-dashboard.el")))
