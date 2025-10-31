@@ -44,7 +44,7 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Open vterm
-(global-set-key (kbd "C-x C-\\") 'open-term)
+(global-set-key (kbd "C-j") 'open-term)
 
 
 (global-unset-key (kbd "C-x C-;"))
