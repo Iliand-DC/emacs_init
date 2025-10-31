@@ -24,10 +24,10 @@
 
 
 (global-unset-key (kbd "M-\\"))
-(global-set-key (kbd "M-\\") 'split-window-right)
+(global-set-key (kbd "M-\\") '(lambda() (interactive) (split-window-right) (windmove-right)))
 
 (global-unset-key (kbd "M--"))
-(global-set-key (kbd "M--") 'split-window-below)
+(global-set-key (kbd "M--") '(lambda () (interactive) (split-window-below) (windmove-down)))
 
 (global-set-key (kbd "M-w") 'delete-window)
 
