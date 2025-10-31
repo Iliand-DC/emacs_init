@@ -17,6 +17,11 @@
 
 
 (global-set-key (kbd "C-x C-a") 'eval-buffer)
+;; (global-set-key (kbd "C-x C-r") 'reload-config)
+
+
+(global-set-key (kbd "C-x C-z") 'kill-other-buffers)
+
 
 (global-set-key (kbd "C-x C-o") 'projectile-open-term)
 

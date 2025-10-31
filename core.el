@@ -1,3 +1,16 @@
+(defun kill-other-buffers ()
+  "Kill all other buffers except the current one."
+  (interactive)
+  (mapc 'kill-buffer (delq (current-buffer) (buffer-list)))
+  (delete-other-windows))
+
+
+(defun reload-config ()
+  "Reload all config for emacs"
+  (interactive)
+  (load-file "~/.emacs.d/init.el"))
+
+
 (defun text-scale-once ()
   "Scale down buffer"
   (interactive)
@@ -17,7 +30,9 @@
   "Open terminal in a splitted below window."
   (interactive)
   (windmove-display-down)
-  (vterm))
+  (vterm)
+  (shrink-window-if-larger-than-buffer)
+  (enlarge-window 7))
 
 
 (defun open-config-file()
