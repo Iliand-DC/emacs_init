@@ -34,15 +34,16 @@
  '(list-directory-verbose-switches "-al")
  '(package-selected-packages
    '(all-the-icons async bui centaur-tabs company dap-mode dashboard
-                   doom-themes eglot-inactive-regions eldoc-box
-                   flycheck fzf git-gutter-fringe ivy magit
+                   doom-modeline doom-themes eglot-inactive-regions
+                   eldoc-box flycheck fzf git-gutter-fringe ivy magit
                    magit-section markdown-mode mood-line moody
-                   multiple-cursors neotree outshine projectile
-                   pythonic right-click-context ripgrep ruff-format
-                   scala-mode scala-ts-mode spinner surround transient
-                   treemacs-tab-bar typst-ts-mode ultra-scroll
-                   verilog-ts-mode vterm with-editor yaml yaml-mode
-                   yasnippet zig-mode zig-ts-mode))
+                   multiple-cursors neotree nerd-icons nyan-mode
+                   outshine projectile pythonic right-click-context
+                   ripgrep ruff-format scala-mode scala-ts-mode
+                   spinner surround transient treemacs-tab-bar
+                   typst-ts-mode ultra-scroll verilog-ts-mode vterm
+                   with-editor yaml yaml-mode yasnippet zig-mode
+                   zig-ts-mode))
  '(package-vc-selected-packages
    '((minimal-dashboard :url
                         "https://github.com/dheerajshenoy/minimal-dashboard.el")))

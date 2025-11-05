@@ -11,7 +11,10 @@
   :ensure t
   :config
   (global-set-key (kbd "C-b") 'neotree-toggle)
-  (global-set-key (kbd "C-e") 'neotree-show))
+  (global-set-key (kbd "C-e") 'neotree-show)
+  (setq neo-theme (if (display-graphic-p) 'nerd-icons 'arrow))
+  (add-hook 'neotree-mode-hook (lambda() (display-line-numbers-mode -1)))
+  (add-hook 'neo-after-create-hook (lambda (_)(if (display-graphic-p) (call-interactively 'text-scale-once)))))
 
 
 (use-package eldoc-box
@@ -38,19 +41,13 @@
   (treemacs-resize-icons 15))
 
 
-(use-package neotree
-  :ensure t
-  :config
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  (add-hook 'neotree-mode-hook (lambda() (display-line-numbers-mode -1)))
-  (add-hook 'neo-after-create-hook (lambda (_)(if (display-graphic-p) (call-interactively 'text-scale-once)))))
-
-
 (use-package centaur-tabs
   :ensure t
   :config
   (global-set-key (kbd "M-<up>") 'centaur-tabs-backward-tab)
-  (global-set-key (kbd "M-<down>") 'centaur-tabs-forward-tab))
+  (global-set-key (kbd "M-<down>") 'centaur-tabs-forward-tab)
+  (centaur-tabs-mode)
+  (centaur-tabs-local-mode))
 
 
 (use-package windmove
@@ -81,5 +78,22 @@
   (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
 
+
 (use-package dap-mode
   :ensure t)
+
+
+(use-package nerd-icons
+  :vc (:url "https://github.com/rainstormstudio/nerd-icons.el.git"))
+
+
+(use-package doom-modeline
+  :ensure t
+  :config
+  (doom-modeline-mode))
+
+
+(use-package nyan-mode
+  :ensure t
+  :config
+  (nyan-mode))

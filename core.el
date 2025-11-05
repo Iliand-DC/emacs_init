@@ -85,8 +85,6 @@
 ;; Disable annoyning bell
 (setq ring-bell-function 'ignore)
 
-(centaur-tabs-mode)
-
 ;; Makes *scratch* empty.
 (setq initial-scratch-message "")
 
@@ -107,7 +105,7 @@
 (add-hook 'window-setup-hook 'delete-other-windows)
 
 ;; Enable mood line
-(mood-line-mode)
+;; (mood-line-mode)
 
 ;; Hints about keys
 (which-key-mode)
