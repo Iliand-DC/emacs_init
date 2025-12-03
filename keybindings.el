@@ -67,6 +67,7 @@
 
 (global-unset-key (kbd "C-x f"))
 (global-set-key (kbd "C-x f") 'fzf-projectile)
+(global-set-key (kbd "C-x C-/") 'fzf-grep)
 
 (global-unset-key (kbd "M-k"))
 (global-set-key (kbd "M-p") 'ace-window)
@@ -79,3 +80,6 @@
 (global-unset-key (kbd "C-x C-p"))
 
 (global-set-key (kbd "C-d") 'surround-insert)
+
+(global-set-key (kbd "C-c C-;") 'comment-region)
+(global-set-key (kbd "C-c ;") 'uncomment-region)

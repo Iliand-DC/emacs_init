@@ -3,7 +3,7 @@
 
 (setq mc/cmds-to-run-for-all
       '(
-        eval-buffer
+        reload-config
         ))
 
 (setq mc/cmds-to-run-once
