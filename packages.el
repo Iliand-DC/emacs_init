@@ -61,13 +61,13 @@
   :vc (:url "https://github.com/ogdenwebb/emacs-kaolin-themes.git")
   :ensure t
   :config
-  (load-theme 'kaolin-bubblegum t))
+  (load-theme 'kaolin-shiva t))
 
 
-(use-package nyan-mode
+(use-package doom-modeline
   :ensure t
   :config
-  (nyan-mode))
+  (doom-modeline-mode))
 
 
 (use-package ultra-scroll

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: else_statement
-# key: else
-# --
-else begin
-    $0
-end

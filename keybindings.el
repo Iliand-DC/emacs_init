@@ -83,3 +83,5 @@
 
 (global-set-key (kbd "C-c C-;") 'comment-region)
 (global-set-key (kbd "C-c ;") 'uncomment-region)
+
+(global-set-key (kbd "C-x C-.") 'compile)

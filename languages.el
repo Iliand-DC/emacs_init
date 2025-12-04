@@ -32,6 +32,9 @@
   (add-to-list 'lsp-language-id-configuration
                '(verilog-ts-mode . "sv"))
 
+  (add-to-list 'lsp-language-id-configuration
+               '(typst-ts-mode . "typ"))
+
   (lsp-register-client
    (make-lsp-client :new-connection (lsp-stdio-connection "veridian")
                     :activation-fn (lsp-activate-on "sv")
@@ -40,7 +43,13 @@
   (lsp-register-client
    (make-lsp-client :new-connection (lsp-stdio-connection "jedi-language-server")
                     :activation-fn (lsp-activate-on "python")
-                    :server-id 'jedi-language-server)))
+                    :server-id 'jedi-language-server))
+
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "tinymist")
+                    :activation-fn (lsp-activate-on "typ")
+                    :server-id 'tinymist)))
+
 
 
  ;; Set veridian as lsp for verilog
