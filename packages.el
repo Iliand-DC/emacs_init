@@ -1,3 +1,15 @@
+(use-package ivy
+  :ensure t)
+
+
+(use-package ace-window
+  :ensure t)
+
+
+(use-package company
+  :ensure t)
+
+
 (use-package vterm
   :ensure t
   :config
@@ -57,17 +69,12 @@
   :vc (:url "https://github.com/rainstormstudio/nerd-icons.el.git"))
 
 
-(use-package kaolin-themes
-  :vc (:url "https://github.com/ogdenwebb/emacs-kaolin-themes.git")
+(use-package atom-one-dark-theme
   :ensure t
   :config
-  (load-theme 'kaolin-shiva t))
-
-
-(use-package doom-modeline
-  :ensure t
-  :config
-  (doom-modeline-mode))
+  (load-theme 'atom-one-dark t)
+  (custom-set-faces '(default
+                      ((t (:foreground "gray79"))))))
 
 
 (use-package ultra-scroll
@@ -100,5 +107,20 @@
         ;; fzf/grep-command "rg --no-heading -nH"
         fzf/grep-command "grep -nrH"
         ;; If nil, the fzf buffer will appear at the top of the window
-        fzf/position-bottom t
+        fzf/position-bottom nil
         fzf/window-height 15))
+
+
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode))
+
+
+(use-package moody
+  :ensure t
+  :config
+  (setq-default mode-line-format '("" mode-line-buffer-identification "   " mode-line-position (vc-mode vc-mode) "   " mode-name))
+  (moody-replace-mode-line-front-space)
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode))

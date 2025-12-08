@@ -164,3 +164,5 @@
 (context-menu-mode)
 
 (set-face-attribute 'default nil :family "Hack Nerd Font Mono" :height 120)
+
+(add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))

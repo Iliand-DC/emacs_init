@@ -85,3 +85,14 @@
 (global-set-key (kbd "C-c ;") 'uncomment-region)
 
 (global-set-key (kbd "C-x C-.") 'compile)
+(global-set-key (kbd "M-<up>") 'backward-paragraph)
+(global-set-key (kbd "M-<down>") 'forward-paragraph)
+
+(global-set-key (kbd "M-o") 'fzf-find-file)
+(global-set-key (kbd "M-m") 'bookmark-set)
+(global-set-key (kbd "M-j") 'bookmark-jump)
+(global-set-key (kbd "M-f") 'find-file)
+(global-set-key (kbd "M-d") 'dired)
+(global-set-key (kbd "M-b") 'ibuffer)
+(global-unset-key (kbd "M-c"))
+(global-set-key (kbd "M-c") 'ivy-switch-buffer)
