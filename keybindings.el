@@ -96,3 +96,4 @@
 (global-set-key (kbd "M-b") 'ibuffer)
 (global-unset-key (kbd "M-c"))
 (global-set-key (kbd "M-c") 'ivy-switch-buffer)
+(global-set-key (kbd "M-a") 'avy-goto-char)
