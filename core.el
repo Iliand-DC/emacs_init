@@ -8,7 +8,10 @@
 (defun reload-config ()
   "Reload all config for emacs"
   (interactive)
-  (load-file "~/.emacs.d/init.el"))
+  (load-file "~/.emacs.d/packages.el")
+  (load-file "~/.emacs.d/keybindings.el")
+  (load-file "~/.emacs.d/languages.el")
+  (load-file "~/.emacs.d/core.el"))
 
 
 (defun text-scale-once ()
@@ -109,10 +112,6 @@
 ;; Set cursor style to fancy bar
 (setq-default cursor-type 'bar)
 
-;; Set default font bigger
-(buffer-face-mode t)
-
-
 ;; setup indentation
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
@@ -128,8 +127,6 @@
 
 ;; Enable company mode by default
 (global-company-mode)
-
-(global-display-line-numbers-mode)
 
 ;; Removes *scratch* from buffer after the mode has been set.
 (defun remove-scratch-buffer ()
@@ -163,6 +160,6 @@
 
 (context-menu-mode)
 
-(set-face-attribute 'default nil :family "Hack Nerd Font Mono" :height 120)
+(set-face-attribute 'default nil :family "Hack Nerd Font" :height 120)
 
-(add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
+;; (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))

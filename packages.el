@@ -124,3 +124,9 @@
   (moody-replace-mode-line-front-space)
   (moody-replace-mode-line-buffer-identification)
   (moody-replace-vc-mode))
+
+
+(use-package fasm-mode
+  :vc (:url "https://github.com/emacsattic/fasm-mode.git")
+  :config
+  (add-hook 'fasm-mode-hook (lambda () (electric-indent-local-mode -1)))

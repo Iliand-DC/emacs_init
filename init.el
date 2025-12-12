@@ -6,8 +6,8 @@
 ;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
+(load-file "~/.emacs.d/numbers.el")
 (load-file "~/.emacs.d/core.el")
 (load-file "~/.emacs.d/keybindings.el")
 (load-file "~/.emacs.d/languages.el")
 (load-file "~/.emacs.d/packages.el")
-(load-file "~/.emacs.d/compilation_setup.el")
