@@ -110,7 +110,7 @@
 (which-key-mode)
 
 ;; Set cursor style to fancy bar
-(setq-default cursor-type 'bar)
+;; (setq-default cursor-type 'bar)
 
 ;; setup indentation
 (setq-default indent-tabs-mode nil)
@@ -163,3 +163,9 @@
 (set-face-attribute 'default nil :family "Hack Nerd Font" :height 120)
 
 ;; (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
+
+(load-theme 'modus-operandi-deuteranopia t)
+
+(setq-default mode-line-format '("" mode-line-buffer-identification " " mode-line-position " " vc-mode " " mode-name))
+
+(global-visual-line-mode t)

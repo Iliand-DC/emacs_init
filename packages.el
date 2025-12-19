@@ -66,15 +66,8 @@
 
 
 (use-package nerd-icons
-  :vc (:url "https://github.com/rainstormstudio/nerd-icons.el.git"))
-
-
-(use-package atom-one-dark-theme
   :ensure t
-  :config
-  (load-theme 'atom-one-dark t)
-  (custom-set-faces '(default
-                      ((t (:foreground "gray79"))))))
+  :vc (:url "https://github.com/rainstormstudio/nerd-icons.el.git"))
 
 
 (use-package ultra-scroll
@@ -117,16 +110,14 @@
   (yas-global-mode))
 
 
-(use-package moody
-  :ensure t
-  :config
-  (setq-default mode-line-format '("" mode-line-buffer-identification "   " mode-line-position (vc-mode vc-mode) "   " mode-name))
-  (moody-replace-mode-line-front-space)
-  (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode))
-
-
 (use-package fasm-mode
+  :ensure t
   :vc (:url "https://github.com/emacsattic/fasm-mode.git")
   :config
-  (add-hook 'fasm-mode-hook (lambda () (electric-indent-local-mode -1)))
+  (add-hook 'fasm-mode-hook (lambda () (electric-indent-local-mode -1))))
+
+
+(use-package mood-line
+  :ensure t
+  :config
+  (mood-line-mode))
