@@ -1,11 +1,3 @@
-(use-package ivy
-  :ensure t)
-
-
-(use-package ace-window
-  :ensure t)
-
-
 (use-package company
   :ensure t)
 
@@ -16,16 +8,6 @@
   (define-key vterm-mode-map (kbd "C-S-v") 'vterm-yank)
   (add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode -1)))
   (define-key vterm-mode-map (kbd "C-d") '(lambda() (interactive) (vterm--self-insert) (delete-window))))
-
-
-(use-package neotree
-  :ensure t
-  :config
-  (global-set-key (kbd "C-b") 'neotree-toggle)
-  (global-set-key (kbd "C-e") 'neotree-show)
-  (setq neo-theme (if (display-graphic-p) 'nerd-icons 'arrow))
-  (add-hook 'neotree-mode-hook (lambda() (display-line-numbers-mode -1)))
-  (add-hook 'neo-after-create-hook (lambda (_)(if (display-graphic-p) (call-interactively 'text-scale-once)))))
 
 
 (use-package multiple-cursors
@@ -121,3 +103,19 @@
   :ensure t
   :config
   (mood-line-mode))
+
+
+(use-package kaolin-themes
+  :ensure t
+  :config
+  (load-theme 'kaolin-aurora t))
+
+
+(use-package counsel
+  :ensure t)
+
+
+(use-package vertico
+  :ensure t
+  :config
+  (vertico-mode))

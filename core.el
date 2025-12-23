@@ -116,10 +116,6 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-(ivy-mode)
-
-(ace-window-display-mode)
-
 (setq backup-directory-alist '((".*" . "~/.Trash")))
 
 ;; Disable warnings on startup
@@ -160,12 +156,15 @@
 
 (context-menu-mode)
 
-(set-face-attribute 'default nil :family "Hack Nerd Font" :height 120)
-
-;; (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
-
-(load-theme 'modus-operandi-deuteranopia t)
+(set-face-attribute 'default nil :family "Hack Nerd Font" :height 160)
 
 (setq-default mode-line-format '("" mode-line-buffer-identification " " mode-line-position " " vc-mode " " mode-name))
 
 (global-visual-line-mode t)
+
+(setq-default display-buffer-reuse-frames t)
+
+(add-to-list 'display-buffer-alist
+             '("\\*compilation\\*"
+               (display-buffer-same-window)
+               (reusable-window . t)))

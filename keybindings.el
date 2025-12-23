@@ -78,7 +78,6 @@
 (global-set-key (kbd "C-c N") 'insert-line-below)
 
 (global-unset-key (kbd "C-x C-p"))
-
 (global-set-key (kbd "C-d") 'surround-insert)
 
 (global-set-key (kbd "C-c C-;") 'comment-region)
@@ -88,16 +87,16 @@
 (global-set-key (kbd "M-<up>") 'backward-paragraph)
 (global-set-key (kbd "M-<down>") 'forward-paragraph)
 
-(global-set-key (kbd "M-o") 'fzf-find-file)
+(global-set-key (kbd "M-o") 'counsel-fzf)
 (global-set-key (kbd "M-m") 'bookmark-set)
 (global-set-key (kbd "M-j") 'bookmark-jump)
 (global-unset-key (kbd "M-l"))
 (global-set-key (kbd "M-l") 'list-bookmarks)
-(global-set-key (kbd "M-f") 'find-file)
+(global-set-key (kbd "M-f") 'counsel-find-file)
 (global-set-key (kbd "M-d") 'dired)
 (global-set-key (kbd "M-b") 'ibuffer)
 (global-unset-key (kbd "M-c"))
 (global-set-key (kbd "M-c") 'ivy-switch-buffer)
 (global-set-key (kbd "M-a") 'avy-goto-char)
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-(global-set-key (kbd "M-]") 'project-compile)
+(global-set-key (kbd "M-]") 'compile)
