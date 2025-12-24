@@ -14,6 +14,7 @@
   :ensure t
   :config
   (multiple-cursors-mode)
+  (setq mc/always-run-for-all t)
   (global-set-key (kbd "M-S-<up>") 'mc/mark-previous-like-this)
   (global-set-key (kbd "M-S-<down>") 'mc/mark-next-like-this))
 

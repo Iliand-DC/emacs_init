@@ -168,3 +168,5 @@
              '("\\*compilation\\*"
                (display-buffer-same-window)
                (reusable-window . t)))
+
+(setq org-agenda-files '("~/org/work.org" "~/org/personal.org"))

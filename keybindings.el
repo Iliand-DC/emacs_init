@@ -100,3 +100,5 @@
 (global-set-key (kbd "M-a") 'avy-goto-char)
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (global-set-key (kbd "M-]") 'compile)
+(global-set-key (kbd "M-'") 'join-line)
+(global-set-key (kbd "M-/") 'vterm)
