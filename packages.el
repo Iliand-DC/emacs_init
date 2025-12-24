@@ -1,7 +1,3 @@
-(use-package company
-  :ensure t)
-
-
 (use-package vterm
   :ensure t
   :config

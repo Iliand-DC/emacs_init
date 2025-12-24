@@ -121,9 +121,6 @@
 ;; Disable warnings on startup
 (setq warning-minimum-level :error)
 
-;; Enable company mode by default
-(global-company-mode)
-
 ;; Removes *scratch* from buffer after the mode has been set.
 (defun remove-scratch-buffer ()
   (if (get-buffer "*scratch*")
