@@ -128,7 +128,7 @@
 
 (setq-default hs-minor-mode t)
 
-(global-hl-line-mode)
+;; (global-hl-line-mode)
 
 (setq scroll-conservatively 101)
 
@@ -153,7 +153,7 @@
 
 (context-menu-mode)
 
-(set-face-attribute 'default nil :family "Hack Nerd Font" :height 160)
+(set-face-attribute 'default nil :family "Hack Nerd Font" :height 130)
 
 (setq-default mode-line-format '("" mode-line-buffer-identification " " mode-line-position " " vc-mode " " mode-name))
 
@@ -167,3 +167,15 @@
                (reusable-window . t)))
 
 (setq org-agenda-files '("~/org/work.org" "~/org/personal.org"))
+
+(add-hook 'dired-mode-hook #'dired-hide-details-mode)
+
+(setq dired-dwim-target t)
+
+
+;; Specify auto-save behaviour
+(setq auto-save-list-file-name nil) ; Prevents creation of .emacs.d/auto-save-list
+(setq auto-save-file-name-buffer-postfix ".auto-save")
+(setq auto-save-list-file-prefix (expand-file-name "auto-save/" user-emacs-directory))
+(unless (file-exists-p auto-save-list-file-prefix)
+  (make-directory auto-save-list-file-prefix t))

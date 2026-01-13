@@ -102,12 +102,6 @@
   (mood-line-mode))
 
 
-(use-package kaolin-themes
-  :ensure t
-  :config
-  (load-theme 'kaolin-aurora t))
-
-
 (use-package counsel
   :ensure t)
 
@@ -116,3 +110,40 @@
   :ensure t
   :config
   (vertico-mode))
+
+
+(use-package surround
+  :ensure t)
+
+
+(use-package multiple-cursors
+  :ensure t
+  :config
+  (multiple-cursors-mode)
+  (global-set-key (kbd "M-a") 'mc/mark-all-like-this))
+
+
+(use-package atom-one-dark-theme
+  :ensure t)
+
+
+(use-package kaolin-themes
+  :ensure t)
+
+
+(use-package nano-theme
+  :ensure t)
+
+
+(use-package moody
+  :ensure t
+  :vc (:url "https://github.com/tarsius/moody.git")
+  :config
+  (moody-replace-mode-line-front-space)
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode)
+  (set-face-attribute 'mode-line nil :box 'unspecified)
+  (set-face-attribute 'mode-line nil :box 'unspecified))
+
+
+(load-theme 'nano t)
