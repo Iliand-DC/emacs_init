@@ -51,7 +51,7 @@
 (define-key prog-mode-map (kbd "C-;") 'comment-line )
 
 
-(global-set-key (kbd "C-w") 'kill-current-buffer)
+(global-set-key (kbd "C-w") 'kill-buffer-and-window)
 
 
 (global-unset-key (kbd "C-a"))
@@ -101,3 +101,4 @@
 (global-set-key (kbd "M-]") 'compile)
 (global-set-key (kbd "M-'") 'join-line)
 (global-set-key (kbd "M-/") 'vterm)
+(global-set-key (kbd "M-'") 'zsh-term)

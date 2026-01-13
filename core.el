@@ -5,6 +5,13 @@
   (delete-other-windows))
 
 
+(defun kill-buffer-and-window ()
+  "Kill current buffer and window"
+  (interactive)
+  (kill-current-buffer)
+  (delete-window))
+
+
 (defun reload-config ()
   "Reload all config for emacs"
   (interactive)
@@ -27,6 +34,11 @@
   (interactive)
   (windmove-display-down)
   (projectile-run-vterm))
+
+
+(defun zsh-term()
+  (interactive)
+  (term "/usr/bin/zsh"))
 
 
 (defun open-term()
@@ -121,6 +133,9 @@
 ;; Disable warnings on startup
 (setq warning-minimum-level :error)
 
+;; Enable company mode by default
+;; (global-company-mode)
+
 ;; Removes *scratch* from buffer after the mode has been set.
 (defun remove-scratch-buffer ()
   (if (get-buffer "*scratch*")
@@ -179,3 +194,4 @@
 (setq auto-save-list-file-prefix (expand-file-name "auto-save/" user-emacs-directory))
 (unless (file-exists-p auto-save-list-file-prefix)
   (make-directory auto-save-list-file-prefix t))
+(setq dashboard-startup-banner 'logo)
