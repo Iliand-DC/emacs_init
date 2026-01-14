@@ -6,10 +6,6 @@
   (define-key vterm-mode-map (kbd "C-d") '(lambda() (interactive) (vterm--self-insert) (delete-window))))
 
 
-(use-package company
-  :ensure t)
-
-
 (use-package multiple-cursors
   :ensure t
   :config
@@ -112,12 +108,6 @@
 
 (use-package counsel
   :ensure t)
-
-
-(use-package company
-  :ensure t
-  :config
-  (global-company-mode))
 
 
 (use-package vertico
