@@ -12,7 +12,10 @@
   (multiple-cursors-mode)
   (setq mc/always-run-for-all t)
   (global-set-key (kbd "M-S-<up>") 'mc/mark-previous-like-this)
-  (global-set-key (kbd "M-S-<down>") 'mc/mark-next-like-this))
+  (global-set-key (kbd "M-S-<down>") 'mc/mark-next-like-this)
+  (global-set-key (kbd "M-S-<left>") 'mc/skip-to-previous-like-this)
+  (global-set-key (kbd "M-S-<right>") 'mc/skip-to-next-like-this)
+  (global-set-key (kbd "M-a") 'mc/mark-all-like-this))
 
 
 (use-package windmove
@@ -44,28 +47,10 @@
   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
 
 
-(use-package nerd-icons
-  :ensure t
-  :vc (:url "https://github.com/rainstormstudio/nerd-icons.el.git"))
-
-
 (use-package ultra-scroll
   :ensure t
   :config
   (ultra-scroll-mode))
-
-
-(use-package lsp-mode
-  :init
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  (setq lsp-keymap-prefix "C-c l")
-  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-         (python-mode . lsp)
-         (verilog-ts-mode . lsp)
-         (c-mode . lsp)
-         ;; if you want which-key integration
-         (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp)
 
 
 (use-package fzf
@@ -96,12 +81,6 @@
   (add-hook 'fasm-mode-hook (lambda () (electric-indent-local-mode -1))))
 
 
-(use-package mood-line
-  :ensure t
-  :config
-  (mood-line-mode))
-
-
 (use-package kaolin-themes
   :ensure t)
 
@@ -120,34 +99,27 @@
   :ensure t)
 
 
-(use-package multiple-cursors
+(use-package gruber-darker-theme
+  :ensure t)
+
+
+(use-package company
   :ensure t
   :config
-  (multiple-cursors-mode)
-  (global-set-key (kbd "M-a") 'mc/mark-all-like-this))
+  (global-company-mode))
 
 
-(use-package atom-one-dark-theme
-  :ensure t)
-
-
-(use-package kaolin-themes
-  :ensure t)
-
-
-(use-package nano-theme
-  :ensure t)
-
-
-(use-package moody
+(use-package company-ctags
   :ensure t
-  :vc (:url "https://github.com/tarsius/moody.git")
   :config
-  (moody-replace-mode-line-front-space)
-  (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode)
-  (set-face-attribute 'mode-line nil :box 'unspecified)
-  (set-face-attribute 'mode-line nil :box 'unspecified))
+  (with-eval-after-load 'company
+    (company-ctags-auto-setup)))
 
 
-(load-theme 'nano t)
+(use-package expand-region
+  :ensure t
+  :config
+  (global-set-key (kbd "C-=") 'er/expand-region))
+
+
+(load-theme 'gruber-darker t)

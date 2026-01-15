@@ -168,7 +168,7 @@
 
 (context-menu-mode)
 
-(set-face-attribute 'default nil :family "Hack Nerd Font" :height 130)
+(set-face-attribute 'default nil :family "Hack Nerd Font" :height 160)
 
 (setq-default mode-line-format '("" mode-line-buffer-identification " " mode-line-position " " vc-mode " " mode-name))
 
@@ -186,6 +186,7 @@
 (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
 (setq dired-dwim-target t)
+(add-to-list 'auto-mode-alist '("\\.sv\\'" . verilog-mode))
 
 
 ;; Specify auto-save behaviour

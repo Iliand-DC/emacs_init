@@ -10,3 +10,6 @@ transient
 tree-sitter
 eshell
 .cache
+auto-save
+session*
+tramp

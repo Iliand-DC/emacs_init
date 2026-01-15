@@ -11,7 +11,8 @@
         (define-key verilog-mode-map (kbd "C-M-f") 'forward-sexp)
         (define-key verilog-mode-map (kbd "C-M-b") 'backward-sexp)
         (define-key verilog-mode-map (kbd "C-;") 'self-insert-command)
-        (define-key verilog-mode-map (kbd "M-RET") 'newline)))
+        (define-key verilog-mode-map (kbd "M-RET") 'newline)
+        (define-key verilog-mode-map (kbd "C-x e") '(compile "find . -name '*.sv' -print | etags --regex=/'module \\w*'/i -; find . -name '*.v' -print | etags --regex=/'module \\w*'/i --append -; "))))
 
 (eval-after-load 'verilog-ts-mode
     '(progn
@@ -49,37 +50,3 @@
    (make-lsp-client :new-connection (lsp-stdio-connection "tinymist")
                     :activation-fn (lsp-activate-on "typ")
                     :server-id 'tinymist)))
-
-
-
- ;; Set veridian as lsp for verilog
-;; (with-eval-after-load 'eglot
-;;   (add-to-list 'eglot-server-programs
-;;                '(verilog-mode . ("veridian"))))
-
-
-;; (with-eval-after-load 'eglot
-;;   (add-to-list 'eglot-server-programs
-;;                '(verilog-ts-mode . ("veridian"))))
-
-
-;; ;; Set jedi ls to python mode
-;; (with-eval-after-load 'eglot
-;;   (add-to-list 'eglot-server-programs
-;; 	           '(python-mode . ("jedi-language-server"))))
-
-
-;; (with-eval-after-load 'eglot
-;;   (add-to-list 'eglot-server-programs
-;; 	           '(c-mode . ("clangd"))))
-
-
-;; (with-eval-after-load 'eglot
-;;   (add-to-list 'eglot-server-programs
-;;                '(typst-ts-mode . ("tinymist"))))
-
-
-
-;; (add-hook 'python-mode-hook 'eglot-ensure)
-;; (add-hook 'verilog-mode-hook 'eglot-ensure)
-;; (add-hook 'c-mode-hook 'eglot-ensure)
