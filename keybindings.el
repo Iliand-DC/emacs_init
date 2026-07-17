@@ -102,3 +102,5 @@
 (global-set-key (kbd "M-'") 'join-line)
 (global-set-key (kbd "M-/") 'vterm)
 (global-set-key (kbd "M-'") 'zsh-term)
+(global-unset-key (kbd "M-q"))
+(global-set-key (kbd "M-q") 'indent-rigidly)

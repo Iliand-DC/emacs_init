@@ -65,7 +65,8 @@
         fzf/grep-command "grep -nrH"
         ;; If nil, the fzf buffer will appear at the top of the window
         fzf/position-bottom nil
-        fzf/window-height 15))
+        fzf/window-height 15)
+  (global-set-key (kbd "M-o") 'fzf))
 
 
 (use-package yasnippet
@@ -81,25 +82,7 @@
   (add-hook 'fasm-mode-hook (lambda () (electric-indent-local-mode -1))))
 
 
-(use-package kaolin-themes
-  :ensure t)
-
-
-(use-package counsel
-  :ensure t)
-
-
-(use-package vertico
-  :ensure t
-  :config
-  (vertico-mode))
-
-
 (use-package surround
-  :ensure t)
-
-
-(use-package gruber-darker-theme
   :ensure t)
 
 
@@ -122,4 +105,28 @@
   (global-set-key (kbd "C-=") 'er/expand-region))
 
 
-(load-theme 'gruber-darker t)
+(use-package flash-emacs
+  :ensure t
+  :vc (:url "https://github.com/JiaweiChenC/flash-emacs.git")
+  :config
+  (global-set-key (kbd "M-z") 'flash-emacs-jump))
+
+
+(use-package lsp-mode
+  :ensure t
+  :vc(:url "https://github.com/emacs-lsp/lsp-mode.git")
+  :config
+  (add-hook 'python-mode-hook #'lsp))
+
+
+(use-package odin-mode
+  :ensure t
+  :vc(:url "https://github.com/mattt-b/odin-mode.git"))
+
+
+(use-package lsp-pyright
+  :ensure t
+  :custom (lsp-pyright-langserver-command "pyright") ;; or basedpyright
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred

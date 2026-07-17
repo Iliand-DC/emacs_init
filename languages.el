@@ -42,11 +42,11 @@
                     :server-id 'veridian))
 
   (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection "jedi-language-server")
-                    :activation-fn (lsp-activate-on "python")
-                    :server-id 'jedi-language-server))
-
-  (lsp-register-client
    (make-lsp-client :new-connection (lsp-stdio-connection "tinymist")
                     :activation-fn (lsp-activate-on "typ")
-                    :server-id 'tinymist)))
+                    :server-id 'tinymist))
+
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "clangd")
+                    :activation-fn (lsp-activate-on "c")
+                    :server-id 'clangd)))

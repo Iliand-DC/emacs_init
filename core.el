@@ -8,15 +8,19 @@
 (defun kill-buffer-and-window ()
   "Kill current buffer and window"
   (interactive)
-  (kill-current-buffer)
-  (delete-window))
+  (kill-current-buffer))
+  ;; (delete-window))
+
+
+(defun wrap()
+  (interactive)
+  (visual-line-mode))
 
 
 (defun reload-config ()
   "Reload all config for emacs"
   (interactive)
   (load-file "~/.emacs.d/packages.el")
-  (load-file "~/.emacs.d/keybindings.el")
   (load-file "~/.emacs.d/languages.el")
   (load-file "~/.emacs.d/core.el"))
 
@@ -86,13 +90,16 @@
 ;; Maximize window at startup
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
-(setq-default truncate-lines t)
+;; (setq-default truncate-lines t)
 
 ;; No more typing the whole yes or no. Just y or n will do.
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Enable cua mode by default to normal C+c, C+v
-(cua-mode t)
+;; (cua-mode t)
+
+;; Enable minibuffer completions
+(fido-mode t)
 
 (add-to-list 'auto-mode-alist '("\\.s?vh?\\'" . verilog-ts-mode))
 
@@ -168,18 +175,11 @@
 
 (context-menu-mode)
 
-(set-face-attribute 'default nil :family "Hack Nerd Font" :height 160)
+;; (set-face-attribute 'default nil :family "Hack Nerd Font" :height 160)
 
-(setq-default mode-line-format '("" mode-line-buffer-identification " " mode-line-position " " vc-mode " " mode-name))
+;; (setq-default mode-line-format '("" mode-line-buffer-identification " " mode-line-position " " vc-mode " " mode-name))
 
-(global-visual-line-mode t)
-
-(setq-default display-buffer-reuse-frames t)
-
-(add-to-list 'display-buffer-alist
-             '("\\*compilation\\*"
-               (display-buffer-same-window)
-               (reusable-window . t)))
+;; (global-visual-line-mode t)
 
 (setq org-agenda-files '("~/org/work.org" "~/org/personal.org"))
 
@@ -196,3 +196,10 @@
 (unless (file-exists-p auto-save-list-file-prefix)
   (make-directory auto-save-list-file-prefix t))
 (setq dashboard-startup-banner 'logo)
+(undo-tree-mode)
+(setq make-backup-files nil)
+(add-hook 'find-file-hook (lambda () (flymake-mode -1)))
+
+(delete-selection-mode 1)
+
+(define-key prog-mode-map (kbd "Caps-Lock") 'toggle-input-method)
