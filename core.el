@@ -129,7 +129,7 @@
 (which-key-mode)
 
 ;; Set cursor style to fancy bar
-;; (setq-default cursor-type 'bar)
+(setq-default cursor-type 'bar)
 
 ;; setup indentation
 (setq-default indent-tabs-mode nil)
@@ -195,11 +195,29 @@
 (setq auto-save-list-file-prefix (expand-file-name "auto-save/" user-emacs-directory))
 (unless (file-exists-p auto-save-list-file-prefix)
   (make-directory auto-save-list-file-prefix t))
+
+
 (setq dashboard-startup-banner 'logo)
 (undo-tree-mode)
-(setq make-backup-files nil)
+
+;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
+(custom-set-variables
+ '(auto-save-file-name-transforms
+   '((".*" "~/.emacs.d/autosaves/" t)))
+ '(backup-directory-alist
+   '((".*" . "~/.emacs.d/backups/"))))
+
+;; create the autosave and backups dir if necessary, since emacs won't.
+(make-directory "~/.emacs.d/autosaves/" t)
+(make-directory "~/.emacs.d/backups/" t)
+
+;; (setq make-backup-files nil)
+;; (setq auto-save-default nil)
+
 (add-hook 'find-file-hook (lambda () (flymake-mode -1)))
 
 (delete-selection-mode 1)
 
-(define-key prog-mode-map (kbd "Caps-Lock") 'toggle-input-method)
+(global-set-key (kbd "M-]") 'compile)
+
+(global-set-key (kbd "C-x <f2>") 'lsp-rename)
