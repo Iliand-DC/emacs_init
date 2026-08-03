@@ -180,6 +180,8 @@
 ;; (setq-default mode-line-format '("" mode-line-buffer-identification " " mode-line-position " " vc-mode " " mode-name))
 
 ;; (global-visual-line-mode t)
+(setq-default truncate-lines t)
+
 
 (setq org-agenda-files '("~/org/work.org" "~/org/personal.org"))
 
@@ -221,3 +223,5 @@
 (global-set-key (kbd "M-]") 'compile)
 
 (global-set-key (kbd "C-x <f2>") 'lsp-rename)
+
+(global-set-key (kbd "C-z") 'undo)

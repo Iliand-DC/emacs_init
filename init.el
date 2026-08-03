@@ -6,8 +6,8 @@
 ;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
-(load "~/.emacs.d/numbers.el")
-(load "~/.emacs.d/core.el")
-(load "~/.emacs.d/languages.el")
-(load "~/.emacs.d/packages.el")
-(load-theme 'doom-palenight t) ;; or doom-monokai-pro and doom-moonlight they are pretty cool too
+(load "~/.emacs.d/numbers.elc")
+(load "~/.emacs.d/core.elc")
+(load "~/.emacs.d/languages.elc")
+(load "~/.emacs.d/packages.elc")
+(load-theme 'doom-oksolar-dark t) ;; doom-palenight/doom-moonlight/doom-monokai-pro they are pretty cool
